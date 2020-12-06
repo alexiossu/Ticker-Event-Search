@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_groupProject">
+        <activity android:name=".The_Audio_Database_api"></activity>
+        <activity android:name=".Covid19_case_data" />
+        <activity android:name=".Recipe_Search_page" />
+        <activity android:name=".TicketMaster_event_search" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
