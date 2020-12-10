@@ -8,4 +8,20 @@
     <string name="furtherHelp">If you have any questions regarding this app please contact the author</string>
     <string name="version">Version 1.0</string>
     <string name="TicketMastereventsearch">TicketMaster event search</string>
+    <string name="toast1">You clicked on the overflow menu</string>
+    <string name="toast2">Search for events in the city and radius of the search</string>
+    <string name="snakbar1">Nothing was saved. Try again</string>
+    <string name="toast3">PLEASE ENTER CITY and RADIUS</string>
+    <string name="snackbar2">These are events in area within km</string>
+    <string name="toast4">You clicked on the overflow menu</string>
+    <string name="alert1">Do you want to delete the following event ?</string>
+    <string name="toast6">Enjoy!</string>
+    <string name="quitButton">Quit</string>
+    <string name="saveButton">SAVE</string>
+    <string name="deleteButton">Delete</string>
+    <string name="url">URL :</string>
+    <string name="date">Event Date ~ </string>
+    <string name="time">Event Time ~ </string>
+    <string name="price">Price range ~ </string>
+    <string name="info">General Information ~ </string>
 </resources>

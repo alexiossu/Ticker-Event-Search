@@ -23,6 +23,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
@@ -83,7 +85,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
                  showFavorites();
                 break;
             default:
-                Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.toast1, Toast.LENGTH_LONG).show();
                 break;
         }
         return true;
@@ -114,7 +116,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
         city.setText((pref.getString("city", "")));
         radius.setText((pref.getString("radius", "")));
 
-        Toast.makeText(getApplicationContext(), "Search for events in the city and radius of the search", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), R.string.toast2, Toast.LENGTH_LONG).show();
 
 
         /**
@@ -124,18 +126,14 @@ public class TicketMaster_event_search extends AppCompatActivity {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(eventsList.get(pos).getName())
-
-
-                    .setNegativeButton("DELETE", (click, arg) -> {
-                        eventsList.remove(pos);
-
-                        myAdapter.notifyDataSetChanged();
+/**
+ * // SnackBar
+ */
+                    .setNegativeButton(R.string.quitButton, (click, arg) -> {
+                        Snackbar.make(view, getResources().getString(R.string.snakbar1), BaseTransientBottomBar.LENGTH_LONG).show();
                     })
 
-                    .setNeutralButton("Quit", (click, arg) -> {
-                    })
-
-                    .setPositiveButton("SAVE", (click, arg) -> {
+                    .setPositiveButton(R.string.saveButton, (click, arg) -> {
                         //add to the database and get the new ID
                         ContentValues newRowValues = new ContentValues();
                         //put string sender in the colums
@@ -152,10 +150,10 @@ public class TicketMaster_event_search extends AppCompatActivity {
                     })
 
                     .setMessage(
-                            "URL:" + eventsList.get(pos).getURL() + "\n \n" +
-                                    "Event Date: " + eventsList.get(pos).getEventTime() + "\n" +
-                                    "Event Time: " + eventsList.get(pos).getEventDate() + "\n \n" +
-                            "Price range: " + eventsList.get(pos).getPriceMin() + "   ~   " + eventsList.get(pos).getPriceMax() + " CAD")
+                            getResources().getString(R.string.url)+""+ eventsList.get(pos).getURL() + "\n \n" +
+                                    getResources().getString(R.string.time)+"" + eventsList.get(pos).getEventTime() + "\n" +
+                                    getResources().getString(R.string.date)+"" + eventsList.get(pos).getEventDate() + "\n \n" + ""+
+                                    getResources().getString(R.string.price)+" " + eventsList.get(pos).getPriceMin() + "   ~   " + eventsList.get(pos).getPriceMax() + " CAD")
                     .create().show();
 
             myAdapter.notifyDataSetChanged();
@@ -169,7 +167,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
         searchButton.setOnClickListener( click -> {
             if ( city.getText().equals("")||city.getText() == null || radius.getText().toString().equals("")||radius.getText().toString() == null) {
                 Toast.makeText(getApplicationContext(),
-                        "PLEASE ENTER CITY and RADIUS",
+                        getResources().getString(R.string.toast3),
                         Toast.LENGTH_LONG).show();
 
             } else {
@@ -181,7 +179,9 @@ public class TicketMaster_event_search extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     *onPause() method sets sharedpreferances
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -266,10 +266,12 @@ public class TicketMaster_event_search extends AppCompatActivity {
             super.onPostExecute(s);
             progressBar.setVisibility(View.INVISIBLE);
             listView.setAdapter(new MyListAdapter());
-            Snackbar.make(listView,"These are events in "+cit+" area within "+rad+" km", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(listView,getResources().getString(R.string.snackbar2)+cit+" "+rad +"km", Snackbar.LENGTH_LONG).show();
         }
     }
-
+    /**
+     * Sets customized view for ListView
+     */
 
     private class MyListAdapter extends BaseAdapter {
 
@@ -310,7 +312,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
         View middle = getLayoutInflater().inflate(R.layout.activity_ticket_help_alert, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("General Information").setView(middle);
+        builder.setMessage(R.string.info).setView(middle);
 
         builder.create().show();
     }

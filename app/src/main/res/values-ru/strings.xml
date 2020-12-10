@@ -9,4 +9,20 @@
     <string name="furtherHelp">Для любых вопросов свяжитесь с автором</string>
     <string name="version">Версия 1.0</string>
     <string name="TicketMastereventsearch">Поиск билетов</string>
+    <string name="toast1">Вы нажали на перегрузочное меню</string>
+    <string name="toast2">Найдите евенты в заданном радиусе</string>
+    <string name="snakbar1">Ничего не сохранилось. Попробуй снова!</string>
+    <string name="toast3">ВВЕДИТЕ ГОРОД и РАДИУС!</string>
+    <string name="snackbar2">Данные эвенты найдены в городе и радиусе ~ </string>
+    <string name="toast4">Вы нажали на перегрузочное меню</string>
+    <string name="alert1">Вы хотите удалить следующий евент ?</string>
+    <string name="toast6">Наслаждайся!</string>
+    <string name="quitButton">Выйти</string>
+    <string name="saveButton">Сохранить</string>
+    <string name="deleteButton">Удалить</string>
+    <string name="url">ЛИНК ~ </string>
+    <string name="date">ДАТА ~ </string>
+    <string name="time">ВРЕМЯ ~ </string>
+    <string name="price">СТОЙМОСТЬ ~ </string>
+    <string name="info">Общая информация ~ </string>
 </resources>

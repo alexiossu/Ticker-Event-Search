@@ -49,7 +49,7 @@ public class FavouriteEvents extends AppCompatActivity {
                // showFavorites();
                 break;
             default:
-                Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getResources().getString(R.string.toast1), Toast.LENGTH_LONG).show();
                 break;
         }
         return true;
@@ -63,7 +63,7 @@ public class FavouriteEvents extends AppCompatActivity {
         View middle = getLayoutInflater().inflate(R.layout.activity_ticket_help_alert, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("General Information").setView(middle);
+        builder.setMessage(R.string.info).setView(middle);
 
         builder.create().show();
     }
@@ -85,16 +85,16 @@ public class FavouriteEvents extends AppCompatActivity {
         listView.setOnItemClickListener((parent, view, pos, id) -> {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Do you want to delete the following event "+ favEvents.get(pos).getName())
+            alertDialogBuilder.setTitle(getResources().getString(R.string.alert1) + favEvents.get(pos).getName())
 
-                    .setNeutralButton("Quit", (click, arg) -> {
+                    .setNeutralButton(R.string.quitButton, (click, arg) -> {
                         Toast.makeText(getApplicationContext(),
-                                "Enjoy!",
+                                getResources().getString(R.string.toast6),
                                 Toast.LENGTH_LONG).show();
                         myAdapter.notifyDataSetChanged();
                     })
 
-                    .setPositiveButton("Delete", (click, arg) -> {
+                    .setPositiveButton(R.string.deleteButton, (click, arg) -> {
                         deleteQuery = "DELETE FROM " + MyDbHelper.TABLE_NAME + " WHERE " + MyDbHelper.COL_ID + " = '" + id + "'";
                         db.execSQL(deleteQuery);
                         favEvents.remove(pos);

@@ -35,7 +35,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        Log.i("Database upgrade", "Old version:" + oldVersion + " newVersion:"+newVersion);
+       // Log.i("Database upgrade", "Old version:" + oldVersion + " newVersion:"+newVersion);
 
         //Delete the old table:
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
