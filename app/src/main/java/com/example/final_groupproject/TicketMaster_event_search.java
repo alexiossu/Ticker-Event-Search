@@ -48,7 +48,6 @@ public class TicketMaster_event_search extends AppCompatActivity {
     String rad;
     SharedPreferences.Editor edit;
     SharedPreferences pref;
-    ImageView event_image;
     private ListView listView;
     private ImageButton searchButton;
     private Toolbar toolbar;
@@ -56,7 +55,6 @@ public class TicketMaster_event_search extends AppCompatActivity {
     private ArrayList<CurrentEvent> eventsList = new ArrayList<>();
     MyListAdapter myAdapter = new MyListAdapter();
     private  String apiKey = "FHc2BjBpvDVQFLEMXqq8gkloZ2rauJVJ";
-    MyDbHelper dbHelper;
     SQLiteDatabase db;
 
     /**
@@ -111,7 +109,6 @@ public class TicketMaster_event_search extends AppCompatActivity {
         toolbar = findViewById(R.id.ticket_toolbar);
         pref = getSharedPreferences("city", MODE_PRIVATE);
         pref = getSharedPreferences("radius", MODE_PRIVATE);
-        event_image = findViewById(R.id.event_image);
         db = new MyDbHelper(this).getWritableDatabase();
 
         city.setText((pref.getString("city", "")));
@@ -120,6 +117,9 @@ public class TicketMaster_event_search extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Search for events in the city and radius of the search", Toast.LENGTH_LONG).show();
 
 
+        /**
+         * Alertdialog menu with options to delete event from events list, save it to DB or quit.
+         */
         listView.setOnItemClickListener((parent, view, pos, id) -> {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -153,8 +153,8 @@ public class TicketMaster_event_search extends AppCompatActivity {
 
                     .setMessage(
                             "URL:" + eventsList.get(pos).getURL() + "\n \n" +
-                             "Event Time: " + eventsList.get(pos).getEventDate() + "\n \n" +
-                                            "Event Date: " + eventsList.get(pos).getEventTime() + "\n \n" +
+                                    "Event Date: " + eventsList.get(pos).getEventTime() + "\n" +
+                                    "Event Time: " + eventsList.get(pos).getEventDate() + "\n \n" +
                             "Price range: " + eventsList.get(pos).getPriceMin() + "   ~   " + eventsList.get(pos).getPriceMax() + " CAD")
                     .create().show();
 
@@ -162,6 +162,10 @@ public class TicketMaster_event_search extends AppCompatActivity {
 
         });
 
+        /**
+         * A search button with epmtycase check for the city and radius fields
+         * Execute query after the search button was pressed
+         */
         searchButton.setOnClickListener( click -> {
             if ( city.getText().equals("")||city.getText() == null || radius.getText().toString().equals("")||radius.getText().toString() == null) {
                 Toast.makeText(getApplicationContext(),
@@ -191,13 +195,11 @@ public class TicketMaster_event_search extends AppCompatActivity {
     /**
      *Async class to is parsing JSON data and adding it to the CurrentEvent list
      */
-
     public class TicketQuery extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... args) {
 
-            String imageUrl = "no imageUrl";
             int minPrice = 0;
             int maxPrice = 0;
             String eventDate = "";
@@ -233,11 +235,6 @@ public class TicketMaster_event_search extends AppCompatActivity {
                         eventName = anObject.getString("name");
                         eventUrl = anObject.getString("url");
 
-                     if (anObject.has("images")) {
-                         JSONArray imageArray = anObject.getJSONArray("images");
-                         imageUrl = imageArray.getJSONObject(0).getString("url");
-                     }
-
                      if (anObject.has("dates")) {
                          JSONObject dates = anObject.getJSONObject("dates");
                          JSONObject start = dates.getJSONObject("start");
@@ -251,7 +248,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
                             maxPrice = priceRangesArray.getJSONObject(0).getInt("max");
                         }
 
-                        eventsList.add(new CurrentEvent(eventName, eventUrl, eventDate, eventTime, minPrice, maxPrice, 0, imageUrl, ""));
+                        eventsList.add(new CurrentEvent(eventName, eventUrl, eventDate, eventTime, minPrice, maxPrice, 0));
                     }
                 }
             }
@@ -272,6 +269,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
             Snackbar.make(listView,"These are events in "+cit+" area within "+rad+" km", Snackbar.LENGTH_LONG).show();
         }
     }
+
 
     private class MyListAdapter extends BaseAdapter {
 

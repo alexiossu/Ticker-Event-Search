@@ -1,6 +1,5 @@
 package com.example.final_groupproject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,7 +16,6 @@ public class MyDbHelper extends SQLiteOpenHelper {
     public static final String COL_TIME = "TIME";
     public static final String COL_MAX = "MAX";
     public static final String COL_MIN = "MIN";
-    public static final String COL_SAVED = "SAVED";
 
 
     public MyDbHelper(Context context){
@@ -26,15 +24,13 @@ public class MyDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void onCreate(SQLiteDatabase db)
-    {
-        //Make sure you put spaces between SQL statements and Java strings:
+    public void onCreate(SQLiteDatabase db) {
+
         db.execSQL("CREATE TABLE " + TABLE_NAME + "( "
                 + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_NAME + " TEXT, " + COL_URL + " TEXT,"
                 + COL_DATE + " TEXT," + COL_TIME + " TEXT,"
-                + COL_MIN + " INT," + COL_MAX + " INT,"
-                + COL_SAVED + " TEXT );");
+                + COL_MIN + " INT," + COL_MAX + " INT );");
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
