@@ -1,25 +1,36 @@
 package com.example.final_groupproject;
 
-    public class CurrentEvent {
+/**
+ * @author Aleksei Surkov
+ * @version 1.0
+ */
 
-        private long id;
-        private String name, url;
-        private String eventTime, eventDate;
-        private double priceMin, priceMax;
+/**
+ *
+ */
+public class CurrentEvent {
 
-        public CurrentEvent(String name, String url, String eventTime, String eventDate, double priceMin, double priceMax,long id){
-            this.name = name;
-            this.url = url;
-            this.eventTime = eventTime;
-            this.eventDate = eventDate;
-            this.priceMin = priceMin ;
-            this.priceMax = priceMax;
-            this.id = id;
+    private long id;
+    private String name, url,eventTime, eventDate;
+    private double priceMin, priceMax;
+
+
+    public CurrentEvent(long id, String name, String url, String eventTime, String eventDate, double priceMin, double priceMax) {
+
+        this.name = name;
+        this.url = url;
+        this.eventTime = eventTime;
+        this.eventDate = eventDate;
+        this.priceMin = priceMin ;
+        this.priceMax = priceMax;
+        this.id = id;
         }
+
         public long getId() {
+
             return id;
         }
-        public String getName(){
+        public String getName() {
 
             return name;
         }
@@ -27,24 +38,26 @@ package com.example.final_groupproject;
 
             return url;
         }
-        public String getEventTime()
-        {
+        public String getEventTime() {
+
             return eventTime;
         }
-        public String getEventDate(){
+
+        public String getEventDate() {
 
             return eventDate;
         }
-        public double getPriceMin(){
+        public double getPriceMin() {
 
             return priceMin;
         }
-        public double getPriceMax(){
+        public double getPriceMax() {
 
             return priceMax;
         }
 
         public String toString() {
+
             return name;
         }
     }

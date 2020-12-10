@@ -17,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
+/**
+ * @author Aleksei Surkov
+ * @version 1.0
+ */
+
 public class FavouriteEvents extends AppCompatActivity {
 
     private int id, name, url, max, min, date, time;
@@ -129,9 +134,9 @@ public class FavouriteEvents extends AppCompatActivity {
 
         //iterates putting data into an object
         while(cursor.moveToNext()) {
-            favEvents.add(new CurrentEvent(cursor.getString(name), cursor.getString(url), cursor.getString(date),
+            favEvents.add(new CurrentEvent(cursor.getLong(id), cursor.getString(name), cursor.getString(url), cursor.getString(date),
                     cursor.getString(time), cursor.getInt(min),
-                    cursor.getInt(max), cursor.getLong(id)));
+                    cursor.getInt(max) ));
         }
     }
 

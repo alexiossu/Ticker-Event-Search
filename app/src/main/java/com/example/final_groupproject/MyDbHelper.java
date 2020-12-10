@@ -5,6 +5,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+/**
+ * @author Aleksei Surkov
+ * @version 1.0
+ */
+
 public class MyDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MyDatabaseFile";
     public static final int VERSION_NUM = 3;
@@ -22,7 +27,6 @@ public class MyDbHelper extends SQLiteOpenHelper {
 
         super(context, DATABASE_NAME, null, VERSION_NUM );
     }
-
 
     public void onCreate(SQLiteDatabase db) {
 

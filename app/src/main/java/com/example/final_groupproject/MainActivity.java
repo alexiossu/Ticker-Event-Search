@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
         Button covid19Buttom = findViewById(R.id.covid19Button);
         Button audioDbButton = findViewById(R.id.audioDbButton);*/
 
-        if (ticketMasterButton != null) {
+
             Intent goToTicketMaster = new Intent(MainActivity.this, TicketMaster_event_search.class);
             ticketMasterButton.setOnClickListener(e -> {
                 startActivity(goToTicketMaster);
             });
-        }
+
 
         /*Intent goToRecipeSearch = new Intent(MainActivity.this, Recipe_Search_page.class);
         ticketMasterButton.setOnClickListener( e -> {

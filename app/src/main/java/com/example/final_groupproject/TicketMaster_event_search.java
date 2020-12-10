@@ -248,7 +248,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
                             maxPrice = priceRangesArray.getJSONObject(0).getInt("max");
                         }
 
-                        eventsList.add(new CurrentEvent(eventName, eventUrl, eventDate, eventTime, minPrice, maxPrice, 0));
+                        eventsList.add(new CurrentEvent(0, eventName, eventUrl, eventDate, eventTime, minPrice, maxPrice ));
                     }
                 }
             }
