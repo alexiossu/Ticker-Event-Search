@@ -9,13 +9,14 @@
     tools:context=".MainActivity">
 
     <Button
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/ticketMasterButton"
         android:layout_gravity="fill"
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:text="TicketMaster event search"
+        android:text="@string/TicketMastereventsearch"
         />
 
     <Button

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Поиск билетов</string>
+    <string name="eventTicketSearch">Поиск билетов</string>
+    <string name="CityName">Город</string>
+    <string name="Radius">Радиус</string>
+    <string name="instructions">Инструкци: Выберите город и радиус в в котором вы ищите события</string>
+    <string name="author_aleksei_surkov">Автор: Алексей Сурков</string>
+    <string name="furtherHelp">Для любых вопросов свяжитесь с автором</string>
+    <string name="version">Версия 1.0</string>
+    <string name="TicketMastereventsearch">Поиск билетов</string>
+</resources>

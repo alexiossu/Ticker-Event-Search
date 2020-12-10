@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.final_groupproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_groupProject">
-        <activity android:name=".The_Audio_Database_api"></activity>
+        <activity android:name=".FavouriteEvents"></activity>
+        <activity android:name=".ticket_help_alert" />
+        <activity android:name=".The_Audio_Database_api" />
         <activity android:name=".Covid19_case_data" />
         <activity android:name=".Recipe_Search_page" />
         <activity android:name=".TicketMaster_event_search" />

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,16 +16,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button ticketMasterButton = findViewById(R.id.ticketMasterButton);
-        Button recipeSearchButton = findViewById(R.id.recipeButton);
+        /*Button recipeSearchButton = findViewById(R.id.recipeButton);
         Button covid19Buttom = findViewById(R.id.covid19Button);
-        Button audioDbButton = findViewById(R.id.audioDbButton);
+        Button audioDbButton = findViewById(R.id.audioDbButton);*/
 
-        Intent goToTicketMaster = new Intent(MainActivity.this, TicketMaster_event_search.class);
-        ticketMasterButton.setOnClickListener( e -> {
-            startActivity(goToTicketMaster);
-        });
+        if (ticketMasterButton != null) {
+            Intent goToTicketMaster = new Intent(MainActivity.this, TicketMaster_event_search.class);
+            ticketMasterButton.setOnClickListener(e -> {
+                startActivity(goToTicketMaster);
+            });
+        }
 
-        Intent goToRecipeSearch = new Intent(MainActivity.this, Recipe_Search_page.class);
+        /*Intent goToRecipeSearch = new Intent(MainActivity.this, Recipe_Search_page.class);
         ticketMasterButton.setOnClickListener( e -> {
             startActivity(goToRecipeSearch);
         });
@@ -37,5 +41,7 @@ public class MainActivity extends AppCompatActivity {
         ticketMasterButton.setOnClickListener( e -> {
             startActivity(goToAudioDbButton);
         });
+    }*/
     }
 }
+
