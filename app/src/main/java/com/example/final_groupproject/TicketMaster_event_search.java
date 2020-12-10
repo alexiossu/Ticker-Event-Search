@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -53,6 +56,8 @@ public class TicketMaster_event_search extends AppCompatActivity {
     private ArrayList<CurrentEvent> eventsList = new ArrayList<>();
     MyListAdapter myAdapter = new MyListAdapter();
     private  String apiKey = "FHc2BjBpvDVQFLEMXqq8gkloZ2rauJVJ";
+    MyDbHelper dbHelper;
+    SQLiteDatabase db;
 
     /**
      * Inflate the menu items for use in the action bar
@@ -77,13 +82,20 @@ public class TicketMaster_event_search extends AppCompatActivity {
                 helpDialog();
                 break;
             case R.id.favorite_item:
-                // showFavorites();
+                 showFavorites();
                 break;
             default:
                 Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
                 break;
         }
         return true;
+    }
+    /**
+     * Starting Favourites activity with saved events
+     */
+    private void showFavorites() {
+        Intent goToFavorities  = new Intent(this, FavouriteEvents.class);
+        startActivity(goToFavorities);
     }
 
     @Override
@@ -100,6 +112,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
         pref = getSharedPreferences("city", MODE_PRIVATE);
         pref = getSharedPreferences("radius", MODE_PRIVATE);
         event_image = findViewById(R.id.event_image);
+        db = new MyDbHelper(this).getWritableDatabase();
 
         city.setText((pref.getString("city", "")));
         radius.setText((pref.getString("radius", "")));
@@ -109,27 +122,39 @@ public class TicketMaster_event_search extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, pos, id) -> {
 
-        //    View aNewRow = getLayoutInflater().inflate(R.layout.even_image, null, false);
-        //    ImageView evImg = aNewRow.findViewById(R.id.event_image);
-
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(eventsList.get(pos).getName())
 
 
-                    .setPositiveButton("DELETE", (click, arg) -> {
+                    .setNegativeButton("DELETE", (click, arg) -> {
                         eventsList.remove(pos);
+
                         myAdapter.notifyDataSetChanged();
                     })
 
-                    .setNegativeButton("Quit", (click, arg) -> {
+                    .setNeutralButton("Quit", (click, arg) -> {
+                    })
 
+                    .setPositiveButton("SAVE", (click, arg) -> {
+                        //add to the database and get the new ID
+                        ContentValues newRowValues = new ContentValues();
+                        //put string sender in the colums
+                        newRowValues.put(MyDbHelper.COL_NAME, eventsList.get(pos).getName());
+                        newRowValues.put(MyDbHelper.COL_URL, eventsList.get(pos).getURL());
+                        newRowValues.put(MyDbHelper.COL_DATE, eventsList.get(pos).getEventDate());
+                        newRowValues.put(MyDbHelper.COL_DATE, eventsList.get(pos).getEventTime());
+                        newRowValues.put(MyDbHelper.COL_MIN, eventsList.get(pos).getPriceMin());
+                        newRowValues.put(MyDbHelper.COL_MIN, eventsList.get(pos).getPriceMax());
+                        //Now insert in the database:
+                        long newId = db.insert(MyDbHelper.TABLE_NAME, null, newRowValues);
+
+                        myAdapter.notifyDataSetChanged();
                     })
 
                     .setMessage(
-                                    "           " +
                             "URL:" + eventsList.get(pos).getURL() + "\n \n" +
-                             "Event time " + eventsList.get(pos).getEventDate() + "\n \n" +
-                                            "Event date " + eventsList.get(pos).getEventTime() + "\n \n" +
+                             "Event Time: " + eventsList.get(pos).getEventDate() + "\n \n" +
+                                            "Event Date: " + eventsList.get(pos).getEventTime() + "\n \n" +
                             "Price range: " + eventsList.get(pos).getPriceMin() + "   ~   " + eventsList.get(pos).getPriceMax() + " CAD")
                     .create().show();
 
@@ -172,9 +197,6 @@ public class TicketMaster_event_search extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
-            String result; //The results returnd from JSON query
-            int searchUpdate;// used to populate the progress bar
-            String info;
             String imageUrl = "no imageUrl";
             int minPrice = 0;
             int maxPrice = 0;
@@ -197,7 +219,7 @@ public class TicketMaster_event_search extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
 
-                    result = sb.toString();
+                    String result = sb.toString();
                     JSONObject parsedObj = new JSONObject(result);
 
 
@@ -228,9 +250,8 @@ public class TicketMaster_event_search extends AppCompatActivity {
                             minPrice = priceRangesArray.getJSONObject(0).getInt("min");
                             maxPrice = priceRangesArray.getJSONObject(0).getInt("max");
                         }
-                        eventsList.add(new CurrentEvent(eventName, eventUrl, eventDate, eventTime, minPrice, maxPrice, 0, imageUrl, ""));// adds each event to the list
 
-
+                        eventsList.add(new CurrentEvent(eventName, eventUrl, eventDate, eventTime, minPrice, maxPrice, 0, imageUrl, ""));
                     }
                 }
             }

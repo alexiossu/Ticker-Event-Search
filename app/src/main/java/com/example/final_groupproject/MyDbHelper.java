@@ -1,26 +1,30 @@
 package com.example.final_groupproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class MyDatabaseOpenHelper extends SQLiteOpenHelper {
+public class MyDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MyDatabaseFile";
-    public static final int VERSION_NUM = 1;
+    public static final int VERSION_NUM = 3;
     public static final String TABLE_NAME = "EVENTS";
     public static final String COL_ID = "_id";
     public static final String COL_NAME = "EVENT";
     public static final String COL_URL = "URL";
+    public static final String COL_DATE = "DATE";
+    public static final String COL_TIME = "TIME";
     public static final String COL_MAX = "MAX";
     public static final String COL_MIN = "MIN";
     public static final String COL_SAVED = "SAVED";
 
 
-    public MyDatabaseOpenHelper(Activity ctx){
-        //The factory parameter should be null, unless you know a lot about Database Memory management
-        super(ctx, DATABASE_NAME, null, VERSION_NUM );
+    public MyDbHelper(Context context){
+
+        super(context, DATABASE_NAME, null, VERSION_NUM );
     }
+
 
     public void onCreate(SQLiteDatabase db)
     {
@@ -28,7 +32,8 @@ public class MyDatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "( "
                 + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_NAME + " TEXT, " + COL_URL + " TEXT,"
-                + COL_MAX + " INT, " + COL_MIN + " INT,"
+                + COL_DATE + " TEXT," + COL_TIME + " TEXT,"
+                + COL_MIN + " INT," + COL_MAX + " INT,"
                 + COL_SAVED + " TEXT );");
     }
 
