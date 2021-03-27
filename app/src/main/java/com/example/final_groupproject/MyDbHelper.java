@@ -23,23 +23,22 @@ public class MyDbHelper extends SQLiteOpenHelper {
     public static final String COL_MIN = "MIN";
 
 
-    public MyDbHelper(Context context){
+    public MyDbHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, VERSION_NUM );
+        super(context, DATABASE_NAME, null, VERSION_NUM);
     }
 
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("CREATE TABLE " + TABLE_NAME + "( "
-                + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_NAME + " TEXT, " + COL_URL + " TEXT,"
                 + COL_DATE + " TEXT," + COL_TIME + " TEXT,"
                 + COL_MIN + " INT," + COL_MAX + " INT );");
     }
 
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
-       // Log.i("Database upgrade", "Old version:" + oldVersion + " newVersion:"+newVersion);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Log.i("Database upgrade", "Old version:" + oldVersion + " newVersion:"+newVersion);
 
         //Delete the old table:
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -48,9 +47,8 @@ public class MyDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
-        Log.i("Database downgrade", "Old version:" + oldVersion + " newVersion:"+newVersion);
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.i("Database downgrade", "Old version:" + oldVersion + " newVersion:" + newVersion);
 
         //Delete the old table:
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);

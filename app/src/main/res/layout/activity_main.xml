@@ -17,36 +17,6 @@
         android:layout_columnWeight="1"
         android:text="@string/TicketMastereventsearch"
         />
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/recipeButton"
-        android:layout_gravity="fill"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:text="Recipe Search page"
-        />
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/covid19Button"
-        android:layout_gravity="fill"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:text="Covid-19 case data"
-        />
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/audioDbButton"
-        android:layout_gravity="fill"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:text="The Audio Database api"
-        />
 </GridLayout>
 
 
